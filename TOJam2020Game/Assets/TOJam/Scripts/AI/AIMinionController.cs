@@ -19,9 +19,29 @@ public class AIMinionController : MonoBehaviour
 
     private void Start()
     {
+        m_Data.canAttack = true;
     }
 
     private void Update()
     {
+        if (m_Agent.destination == null || m_Agent.destination == transform.position)
+        {
+            m_StateMachine.SetBool("TargetFound?", false);
+        }
+    }
+
+    public void StartCoolDownTimer()
+    {
+        StartCoroutine(AttackCooldownTimer());
+    }
+
+    IEnumerator AttackCooldownTimer()
+    {
+        m_Data.canAttack = false;
+        print("in cooldown");
+
+        yield return new WaitForSeconds(m_Data.attackCooldown);
+
+        m_Data.canAttack = true;
     }
 }

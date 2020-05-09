@@ -9,4 +9,7 @@ public class MinionData : ScriptableObject
     public float attackPower;
     public float moveSpeed;
     public bool isSelected;
+    public float attackRange;
+    public float attackCooldown;
+    public bool canAttack;
 }
