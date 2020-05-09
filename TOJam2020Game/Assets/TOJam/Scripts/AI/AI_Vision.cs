@@ -5,17 +5,17 @@ using UnityEngine;
 public class AI_Vision : MonoBehaviour
 {
     [SerializeField] Transform ControlPointsHolder;
-    [SerializeField] string controlPointHolderName = "ControlPointsHolder";
+    [SerializeField] string controlPointHolderName = "ControlsPointsHolder";
     [SerializeField] LayerMask playerUnitsMask;
     public string aIControlTag = "AIControl";
     public string playerControlTag = "PlayerControl";
 
     public List<Transform> controlPoints;
 
-    bool noPlayerMinionInSight = true;
+    [SerializeField] bool noPlayerMinionInSight = true;
     float controlPointDistance;
 
-    public Transform currentTarget;
+    public GameObject currentTarget;
 
     private void Awake()
     {
@@ -46,7 +46,7 @@ public class AI_Vision : MonoBehaviour
                     {
                         controlPointDistance = Vector3.Distance(Origin, controlPoints[i].position);
                         destination = controlPoints[i].position;
-                        currentTarget = controlPoints[i];
+                        currentTarget = controlPoints[i].gameObject;
                     }
                 }
                 else
@@ -57,7 +57,7 @@ public class AI_Vision : MonoBehaviour
                         {
                             controlPointDistance = Vector3.Distance(Origin, controlPoints[i].position);
                             destination = controlPoints[i].position;
-                            currentTarget = controlPoints[i];
+                            currentTarget = controlPoints[i].gameObject;
                         }
                     }
                        
@@ -73,19 +73,19 @@ public class AI_Vision : MonoBehaviour
     {
         if (!noPlayerMinionInSight)
         {
-            return currentTarget.position;
+            return currentTarget.transform.position;
         }
         else return Vector3.zero;
         
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        if (collision.gameObject.layer == playerUnitsMask)
+        if ((playerUnitsMask & 1 << other.gameObject.layer) == 1 << other.gameObject.layer)
         {
             if (noPlayerMinionInSight)
             {
-                currentTarget = collision.gameObject.transform;
+                currentTarget = other.gameObject;
                 noPlayerMinionInSight = false;
             }
         }

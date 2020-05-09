@@ -8,7 +8,7 @@ public class ObjectSelector : MonoBehaviour
     public Transform Pointer;
     [SerializeField] int GroundLayerID,pUnitLayerID;
 
-    [SerializeField]List<GameObject> SelectedUnits;
+    public List<GameObject> SelectedUnits;
 
     // Start is called before the first frame update
     void Start()

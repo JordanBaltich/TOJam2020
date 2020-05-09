@@ -942,6 +942,7 @@ GameObject:
   - component: {fileID: 1785957128}
   - component: {fileID: 1785957127}
   - component: {fileID: 1785957129}
+  - component: {fileID: 1785957130}
   m_Layer: 8
   m_Name: Player-Unit
   m_TagString: Untagged
@@ -986,7 +987,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1785957123}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 13.75, y: 0.5, z: 0}
+  m_LocalPosition: {x: -0, y: 0.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 861526095}
@@ -1050,6 +1051,19 @@ MonoBehaviour:
   m_Data: {fileID: 11400000, guid: 46c1bf9dad49d4b419957be71b3a216a, type: 2}
   MoveTarget: {fileID: 1024066504}
   moveTargetTag: MoveTarget
+  playerBody: {fileID: 861526093}
+--- !u!114 &1785957130
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1785957123}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f2a375f9113ea4469cab302cb440683, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1876301137
 GameObject:
   m_ObjectHideFlags: 0
@@ -1289,7 +1303,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 617990311e0bcab4c83051cfcea1f349, type: 2}
+  - {fileID: 2100000, guid: 4f803b0a237061a4a8d895a9a05ee1f0, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
