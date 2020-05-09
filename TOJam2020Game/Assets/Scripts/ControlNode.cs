@@ -65,6 +65,7 @@ public class ControlNode : MonoBehaviour
             foreach (MeshRenderer meshrenderer in myalphaMeshRenderers)
             {
                 meshrenderer.material = alphaMats[0];
+                tag = "PlayerControl";
             }
         }
         if (completionStatus < 0)
@@ -72,6 +73,7 @@ public class ControlNode : MonoBehaviour
             foreach (MeshRenderer meshrenderer in myalphaMeshRenderers)
             {
                 meshrenderer.material = alphaMats[1];
+                tag = "AIControl";
             }
         }
     }

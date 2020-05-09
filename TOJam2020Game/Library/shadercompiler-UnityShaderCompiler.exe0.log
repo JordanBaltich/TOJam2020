@@ -1,17 +1,2 @@
 Base path: 'C:/Program Files/Unity/Hub/Editor/2019.3.9f1/Editor/Data', plugins path 'C:/Program Files/Unity/Hub/Editor/2019.3.9f1/Editor/Data/PlaybackEngines'
 Cmd: initializeCompiler
-Cmd: preprocess
-  insize=1349 outsize=1632 ok=1
-Cmd: preprocess
-  insize=1678 outsize=1794 ok=1
-Cmd: preprocess
-  error: 1 plat 21 at (133): Both vertex and fragment programs must be present in a shader snippet. Excluding it from compilation.
-  insize=3112 outsize=3325 ok=1
-Cmd: preprocess
-  insize=1424 outsize=1632 ok=1
-Cmd: preprocess
-  error: 1 plat 21 at (106): Both vertex and fragment programs must be present in a shader snippet. Excluding it from compilation.
-  insize=2300 outsize=3230 ok=1
-Cmd: preprocess
-  error: 1 plat 21 at (120): Both vertex and fragment programs must be present in a shader snippet. Excluding it from compilation.
-  insize=2543 outsize=3302 ok=1
