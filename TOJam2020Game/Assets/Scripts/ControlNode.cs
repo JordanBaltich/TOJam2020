@@ -36,7 +36,7 @@ public class ControlNode : MonoBehaviour
 
     public void AssignMats()
     {
-        foreach(MeshRenderer meshrenderer in myBaseMeshRenderers)
+        foreach (MeshRenderer meshrenderer in myBaseMeshRenderers)
         {
             meshrenderer.material = baseMats[(int)myTeam];
         }
@@ -48,8 +48,6 @@ public class ControlNode : MonoBehaviour
 
     void Update()
     {
-        completionStatus = Mathf.Clamp(completionStatus + unitControl * Time.deltaTime * fillRate, -threshold, threshold);
-
         if (completionStatus >= threshold)
         {
             myTeam = Team.blue;
@@ -62,7 +60,7 @@ public class ControlNode : MonoBehaviour
         }
 
         progressDiscGO.transform.localScale = Vector3.one * (Mathf.Lerp(0.08f, 0.45f, (Mathf.Abs(completionStatus)) / threshold));
-        if(completionStatus > 0)
+        if (completionStatus > 0)
         {
             foreach (MeshRenderer meshrenderer in myalphaMeshRenderers)
             {
@@ -78,27 +76,15 @@ public class ControlNode : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
         if (other.gameObject.CompareTag("PlayerControlled"))
         {
-            unitControl += 1;
+            completionStatus = Mathf.Clamp(completionStatus + 1 * Time.deltaTime * fillRate, -threshold, threshold);
         }
         else if (other.gameObject.CompareTag("AIControlled"))
         {
-            unitControl -= 1;
-        }
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.gameObject.CompareTag("PlayerControlled"))
-        {
-            unitControl -= 1;
-        }
-        else if (other.gameObject.CompareTag("AIControlled"))
-        {
-            unitControl += 1;
-        }
+            completionStatus = Mathf.Clamp(completionStatus - 1 * Time.deltaTime * fillRate, -threshold, threshold);
+        }        
     }
 }
