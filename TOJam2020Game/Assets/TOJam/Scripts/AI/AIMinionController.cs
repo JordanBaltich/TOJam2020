@@ -9,6 +9,7 @@ public class AIMinionController : MonoBehaviour
     Animator m_StateMachine;
     public NavMeshAgent m_Agent;
     public MinionData m_Data;
+    public Transform forwardTarget;
 
     private void Awake()
     {
