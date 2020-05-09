@@ -11,14 +11,7 @@ public class CameraController : MonoBehaviour
     public float movementSpeed;
     public float movementTime;
 
-    public float minCameraZoomY;
-    public float maxCameraZoomY;
-    public float minCameraZoomZ;
-    public float maxCameraZoomZ;
-
-
     public Vector3 zoomAmount;
-
     public Vector3 newPosition;
     public Vector3 newZoom;
 
@@ -47,13 +40,14 @@ public class CameraController : MonoBehaviour
 
     void MouseInput()
     {
-        //mouse scrolling for camera zoom
-        if(Input.mouseScrollDelta.y != 0)
-        {
+        //mouse scrolling for camera zoom 
 
-            newZoom += Input.mouseScrollDelta.y * zoomAmount;
+        //if(Input.mouseScrollDelta.y != 0)
+        //{
 
-        }
+        //    newZoom += Input.mouseScrollDelta.y * zoomAmount;
+
+        //}
 
         if (Input.GetMouseButtonDown(2))
         {
@@ -126,17 +120,17 @@ public class CameraController : MonoBehaviour
             newPosition += (transform.right * -movementSpeed);
         }
 
-        //keyboard inputs for camera zoom
+        //keyboard inputs for camera zoom Zooming commented out
 
-        if (Input.GetKey(KeyCode.Equals) || Input.GetKey(KeyCode.KeypadPlus))
-        {
-            newZoom += zoomAmount;
-        }
+        //if (Input.GetKey(KeyCode.Equals) || Input.GetKey(KeyCode.KeypadPlus))
+        //{
+        //    newZoom += zoomAmount;
+        //}
 
-        if (Input.GetKey(KeyCode.Minus) || Input.GetKey(KeyCode.KeypadMinus))
-        {
-            newZoom -= zoomAmount;
-        }
+        //if (Input.GetKey(KeyCode.Minus) || Input.GetKey(KeyCode.KeypadMinus))
+        //{
+        //    newZoom -= zoomAmount;
+        //}
 
         //clamping the camera zoom NOT CURRENTLY WORKING AT THE MOMENT HENCE WHY ITS COMMENTED OUT.
 
