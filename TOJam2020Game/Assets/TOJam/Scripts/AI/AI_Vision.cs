@@ -5,7 +5,7 @@ using UnityEngine;
 public class AI_Vision : MonoBehaviour
 {
     [SerializeField] Transform ControlPointsHolder;
-    [SerializeField] string controlPointHolderName = "ControlPointsHolder";
+    [SerializeField] string controlPointHolderName = "ControlsPointsHolder";
     [SerializeField] LayerMask playerUnitsMask;
     public string aIControlTag = "AIControl";
     public string playerControlTag = "PlayerControl";
