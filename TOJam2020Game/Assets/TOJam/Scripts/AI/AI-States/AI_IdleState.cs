@@ -25,7 +25,7 @@ public class AI_IdleState : StateMachineBehaviour
         m_Controller.m_Agent.speed = m_Controller.m_Data.moveSpeed;
         m_Controller.m_Agent.SetDestination(m_Vision.FindNextDestination(animator.transform.position));
 
-        if (m_Controller.m_Agent.destination != null)
+        if (m_Vision.currentTarget != null)
         {
             animator.SetBool("TargetFound?", true);
         }

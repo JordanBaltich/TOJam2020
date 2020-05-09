@@ -1251,6 +1251,7 @@ MonoBehaviour:
   aIControlTag: AIControl
   playerControlTag: PlayerControl
   controlPoints: []
+  noPlayerMinionInSight: 1
   currentTarget: {fileID: 0}
 --- !u!1 &2025645238
 GameObject:

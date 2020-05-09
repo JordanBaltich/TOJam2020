@@ -4,5 +4,7 @@ using UnityEngine;
 
 public class HighlightSelectedObject : MonoBehaviour
 {
+    [SerializeField] Shader unSelectedShader, SelectedShader;
+
     
 }

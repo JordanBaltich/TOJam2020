@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AI_MovingState : StateMachineBehaviour
+public class AI_AttackingState : StateMachineBehaviour
 {
     AI_Vision m_Vision;
     AIMinionController m_Controller;
 
+    float time = 0;
 
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
@@ -19,31 +20,24 @@ public class AI_MovingState : StateMachineBehaviour
     {
         float distanceToTarget = Vector3.Distance(m_Controller.m_Agent.destination, animator.transform.position);
 
-        //check if hostile unit walks into vision
-        if (m_Vision.CheckForPlayerUnits() != Vector3.zero)
+        m_Controller.m_Agent.SetDestination(m_Vision.currentTarget.transform.position);
+
+        if (m_Controller.m_Data.canAttack)
         {
-            m_Controller.m_Agent.SetDestination(m_Vision.CheckForPlayerUnits());
+            m_Vision.currentTarget.GetComponent<Health>().TakeDamage(m_Controller.m_Data.attackPower);
+            m_Controller.StartCoolDownTimer();
         }
 
-        if (m_Vision.currentTarget != null)
+        if (distanceToTarget > m_Controller.m_Data.attackRange)
         {
-            if (m_Vision.currentTarget.tag == m_Vision.aIControlTag)
-            {
-                m_Controller.m_Agent.destination = animator.transform.position;
-                animator.SetBool("TargetFound?", false);
-            }
+            animator.SetBool("isAttacking?", false);
         }
-       
 
-        if (distanceToTarget <= m_Controller.m_Data.attackRange)
-        {
-            animator.SetBool("isAttacking?", true);
-        }
+
     }
 
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-
+        animator.SetBool("isAttacking?", false);
     }
-
 }
