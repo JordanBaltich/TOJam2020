@@ -18,6 +18,10 @@ public class MinionController : MonoBehaviour
     [SerializeField] MeshRenderer playerBody;
     Shader OutlineShader;
 
+    public bool isSelected = false;
+
+    public Vector3 Destination;
+
     private void Awake()
     {
         m_Body = GetComponent<Rigidbody>();
@@ -30,19 +34,19 @@ public class MinionController : MonoBehaviour
     {
        MoveTarget = GameObject.FindGameObjectWithTag(moveTargetTag).transform;
 
-        m_Health.FindUnitType();
+        m_Health.maxHealth = m_Data.maxHealth;
+        m_Health.currentHealth = m_Health.maxHealth;
 
         m_Agent.speed = m_Data.moveSpeed;
-        m_Data.currentHealth = m_Data.maxHealth;
-        m_Data.isSelected = false;
+        isSelected = false;
+
+        Destination = transform.position;
     }
 
     private void Update()
     {
-        if (m_Data.isSelected)
+        if (isSelected)
         {
-            Vector3 Destination = new Vector3(MoveTarget.position.x, transform.position.y, MoveTarget.position.z);
-            m_Agent.SetDestination(MoveTarget.position);
             playerBody.material.SetFloat("_OutlineWidth", 0.1f);
         }
         else

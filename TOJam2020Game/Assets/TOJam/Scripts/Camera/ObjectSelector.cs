@@ -13,7 +13,7 @@ public class ObjectSelector : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        SelectedUnits = new List<GameObject>();
     }
 
     // Update is called once per frame
@@ -25,20 +25,29 @@ public class ObjectSelector : MonoBehaviour
             bool hit = Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hitInfo);
             if (hit)
             {
+                Debug.Log(hitInfo.collider.gameObject.layer);
+
                 if (CheckIfSelectable(hitInfo.collider.gameObject.layer))
                 {
                     Debug.Log("It's working!");
                     if (hitInfo.collider.gameObject.layer == GroundLayerID)
                     {
-                        Pointer.position = hitInfo.point;
+                        if (SelectedUnits.Count > 0)
+                        {
+                            for (int i = 0; i < SelectedUnits.Count; i++)
+                            {
+                                SelectedUnits[i].GetComponent<MinionController>().Destination = hitInfo.point;
+                                SelectedUnits[i].GetComponent<Animator>().SetBool("isMoving?", true);
+                            }
+                        }
+                       
                     }
                     if (hitInfo.collider.gameObject.layer == pUnitLayerID)
                     {
-                        if (!hitInfo.collider.GetComponent<MinionController>().m_Data.isSelected)
+                        if (!hitInfo.collider.GetComponent<MinionController>().isSelected)
                         {
-                            hitInfo.collider.GetComponent<MinionController>().m_Data.isSelected = true;
+                            hitInfo.collider.GetComponent<MinionController>().isSelected = true;
                             SelectedUnits.Add(hitInfo.collider.gameObject);
-                            Pointer.position = hitInfo.point;
                         }
                     }
                 }
@@ -55,10 +64,13 @@ public class ObjectSelector : MonoBehaviour
 
         if(Input.GetMouseButtonDown(1))
         {
-            foreach (GameObject obj in SelectedUnits)
+            if (SelectedUnits.Count != 0)
             {
-                obj.GetComponent<MinionController>().m_Data.isSelected = false;
-                SelectedUnits.Remove(obj);
+                for (int i = SelectedUnits.Count - 1; i > -1; i--)
+                {
+                    SelectedUnits[i].GetComponent<MinionController>().isSelected = false;
+                    SelectedUnits.Remove(SelectedUnits[i]);
+                }
             }
         }
     }
@@ -66,11 +78,10 @@ public class ObjectSelector : MonoBehaviour
     bool CheckIfSelectable(int layer)
     {
 
-        if ((SelectableObjects & 1 << layer) == 1 << layer)
+        if (layer == GroundLayerID || layer == pUnitLayerID)
         {
             return true;
         }
         else return false;
-
     }
 }

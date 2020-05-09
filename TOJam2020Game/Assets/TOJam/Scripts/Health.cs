@@ -4,68 +4,48 @@ using UnityEngine;
 
 public class Health : MonoBehaviour
 {
-    MinionData unitData;
 
-    public void FindUnitType()
-    {
-        if (GetComponent<MinionController>() != null)
-        {
-            unitData = GetComponent<MinionController>().m_Data;
-            print("I am a Player Unit!");
-        }
-        if (GetComponent<AIMinionController>() != null)
-        {
-            unitData = GetComponent<AIMinionController>().m_Data;
-            print("I am an AI Unit!");
-        }
-    }
+    public float maxHealth;
+    public float currentHealth;
 
     public void Heal(float healAmount)
     {
-        unitData.currentHealth += healAmount;
+        currentHealth += healAmount;
 
-        if (unitData.currentHealth + healAmount >= unitData.maxHealth)
+        if (currentHealth + healAmount >= maxHealth)
         {
-            unitData.currentHealth = unitData.maxHealth;
+            currentHealth = maxHealth;
         }
     }
 
     public void TakeDamage(float damage)
     {
-        print("I made it here");
-        if (unitData != null)
-        {
-            unitData.currentHealth -= damage;
-            print(gameObject.name + "Recieved " + damage + " Damage!");
+        currentHealth -= damage;
+        print(gameObject.name + "Recieved " + damage + " Damage!");
 
-            if (unitData.currentHealth - damage <= 0)
-            {
-                unitData.currentHealth = 0;
-            }
-        }
-        else
+        if (currentHealth - damage <= 0)
         {
-            print("unit data could not be found");
-        }
-       
-    }
-
-    public void GetTotalHealthPool(List<MinionData> blobsDatas)
-    {
-        for (int i = 0; i < blobsDatas.Count; i++)
-        {
-            unitData.maxHealth += blobsDatas[i].maxHealth;
-            unitData.currentHealth += blobsDatas[i].currentHealth;
+            currentHealth = 0;
         }
     }
 
-    public void DistributeHealth(List<MinionData> blobsDatas)
+    public void GetTotalHealthPool(List<GameObject> blobs)
     {
-        float blobsNewCurrentHealth = unitData.currentHealth / blobsDatas.Count;
-
-        for (int i = 0; i < blobsDatas.Count; i++)
+        for (int i = 0; i < blobs.Count; i++)
         {
-            blobsDatas[i].currentHealth = blobsNewCurrentHealth;
+            Health blobHealth = blobs[i].GetComponent<Health>();
+            maxHealth += blobHealth.maxHealth;
+            currentHealth += blobHealth.currentHealth;
+        }
+    }
+
+    public void DistributeHealth(List<GameObject> blobs)
+    {
+        float blobsNewCurrentHealth = currentHealth / blobs.Count;
+
+        for (int i = 0; i < blobs.Count; i++)
+        {
+            blobs[i].GetComponent<Health>().currentHealth = blobsNewCurrentHealth;
         }
     }
 }

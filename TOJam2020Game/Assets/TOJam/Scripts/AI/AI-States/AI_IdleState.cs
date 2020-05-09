@@ -9,6 +9,8 @@ public class AI_IdleState : StateMachineBehaviour
 
     Vector3 direction;
 
+    float rotationSpeed = 20f;
+
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         m_Vision = animator.GetComponentInChildren<AI_Vision>();
@@ -35,21 +37,26 @@ public class AI_IdleState : StateMachineBehaviour
         {
             RaycastHit hitInfo;
             direction = m_Controller.forwardTarget.position - animator.transform.position;
-            Debug.Log(direction.normalized);
+            Debug.DrawRay(animator.transform.position, direction.normalized * 5, Color.red);
 
             if (Physics.Raycast(animator.transform.position, direction.normalized, out hitInfo, 5f, LayerMask.GetMask("Ground")))
             {
-                float angle = Vector3.Angle(animator.transform.position, hitInfo.point);
+                float angle = Vector3.SignedAngle(animator.transform.position, hitInfo.point, Vector3.up);
                 Debug.Log(angle);
 
                 if (angle > 0)
                 {
-                    animator.transform.rotation = Quaternion.RotateTowards(animator.transform.rotation, animator.transform.rotation * Quaternion.Euler(Vector3.up * 5), Time.deltaTime);
+                    m_Controller.forwardTarget.transform.RotateAround(animator.transform.position, Vector3.up, rotationSpeed * Time.deltaTime);
                 }
                 else
                 {
-                    animator.transform.rotation = Quaternion.RotateTowards(animator.transform.rotation, animator.transform.rotation * Quaternion.Euler(Vector3.up * -5), Time.deltaTime);
+                    m_Controller.forwardTarget.transform.RotateAround(animator.transform.position, Vector3.up, -rotationSpeed * Time.deltaTime);
                 }
+            }
+            else
+            {
+                m_Controller.forwardTarget.transform.rotation = Quaternion.Euler(Vector3.zero);
+                m_Controller.forwardTarget.transform.localPosition = Vector3.forward * 2f;
             }
             
                 m_Controller.m_Agent.SetDestination(m_Controller.forwardTarget.position);

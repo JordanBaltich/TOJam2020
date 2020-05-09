@@ -11,6 +11,8 @@ public class AIMinionController : MonoBehaviour
     public MinionData m_Data;
     public Transform forwardTarget;
 
+    public bool canAttack;
+
     private void Awake()
     {
         m_Body = GetComponent<Rigidbody>();
@@ -20,7 +22,7 @@ public class AIMinionController : MonoBehaviour
 
     private void Start()
     {
-        m_Data.canAttack = true;
+        canAttack = true;
     }
 
     private void Update()
@@ -38,11 +40,11 @@ public class AIMinionController : MonoBehaviour
 
     IEnumerator AttackCooldownTimer()
     {
-        m_Data.canAttack = false;
+        canAttack = false;
         print("in cooldown");
 
         yield return new WaitForSeconds(m_Data.attackCooldown);
 
-        m_Data.canAttack = true;
+        canAttack = true;
     }
 }

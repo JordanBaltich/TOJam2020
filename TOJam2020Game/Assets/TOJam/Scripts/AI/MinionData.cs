@@ -5,11 +5,9 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Data", menuName = "ScriptableObjects/MinionData", order = 1)]
 public class MinionData : ScriptableObject
 {
-    public float maxHealth, currentHealth;
+    public float maxHealth;
     public float attackPower;
     public float moveSpeed;
-    public bool isSelected;
     public float attackRange;
     public float attackCooldown;
-    public bool canAttack;
 }

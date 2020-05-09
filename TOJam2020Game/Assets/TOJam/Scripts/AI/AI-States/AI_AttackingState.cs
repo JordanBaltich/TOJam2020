@@ -22,7 +22,7 @@ public class AI_AttackingState : StateMachineBehaviour
 
         m_Controller.m_Agent.SetDestination(m_Vision.currentTarget.transform.position);
 
-        if (m_Controller.m_Data.canAttack)
+        if (m_Controller.canAttack)
         {
             m_Vision.currentTarget.GetComponent<Health>().TakeDamage(m_Controller.m_Data.attackPower);
             m_Controller.StartCoolDownTimer();
