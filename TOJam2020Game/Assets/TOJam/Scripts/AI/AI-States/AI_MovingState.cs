@@ -25,11 +25,15 @@ public class AI_MovingState : StateMachineBehaviour
             m_Controller.m_Agent.SetDestination(m_Vision.CheckForPlayerUnits());
         }
 
-        if (m_Vision.currentTarget.gameObject.tag == m_Vision.aIControlTag)
+        if (m_Vision.currentTarget != null)
         {
-            m_Controller.m_Agent.destination = animator.transform.position;
-            animator.SetBool("TargetFound?", false);
+            if (m_Vision.currentTarget.tag == m_Vision.aIControlTag)
+            {
+                m_Controller.m_Agent.destination = animator.transform.position;
+                animator.SetBool("TargetFound?", false);
+            }
         }
+       
 
         if (distanceToTarget <= m_Controller.m_Data.attackRange)
         {
