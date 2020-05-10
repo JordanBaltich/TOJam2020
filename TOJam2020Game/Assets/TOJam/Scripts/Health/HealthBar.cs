@@ -55,8 +55,6 @@ public class HealthBar : MonoBehaviour
 
     private void LateUpdate()
     {
-        //transform.LookAt(main_Camera.transform);
-        //transform.Rotate(0, 180, 0);
         transform.position = main_Camera.WorldToScreenPoint(health.transform.position + Vector3.up * positionOffset);
     }
 

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RandomRaycastScriptTest : MonoBehaviour
+public class LayerMaskRaycastScriptTest : MonoBehaviour
 {
 
     int layerMask = 1 << 8; //[8] is the index of player-unit index

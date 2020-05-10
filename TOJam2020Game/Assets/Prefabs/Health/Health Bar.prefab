@@ -189,7 +189,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   foregroundImage: {fileID: 6059025599138290723}
   updateSpeedSeconds: 0.2
-  positionOffset: 2
+  positionOffset: 3
 --- !u!1 &6059025600033948225
 GameObject:
   m_ObjectHideFlags: 0
