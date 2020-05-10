@@ -542,7 +542,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SelectableObjects:
     serializedVersion: 2
-    m_Bits: 1280
+    m_Bits: 256
   Pointer: {fileID: 1024066504}
   GroundLayerID: 10
   pUnitLayerID: 8
@@ -650,6 +650,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Player-Unit (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2246877741140902925, guid: 559820d8cda88754883b2358d0a211f8,
+        type: 3}
+      propertyPath: m_TagString
+      value: PlayerControlled
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 559820d8cda88754883b2358d0a211f8, type: 3}
@@ -792,7 +797,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1698215608}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ---- PlayerUnits ----
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -994,6 +999,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player-Unit
       objectReference: {fileID: 0}
+    - target: {fileID: 2246877741140902925, guid: 559820d8cda88754883b2358d0a211f8,
+        type: 3}
+      propertyPath: m_TagString
+      value: PlayerControlled
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 559820d8cda88754883b2358d0a211f8, type: 3}
 --- !u!1001 &7074218834195988642
@@ -1006,12 +1016,12 @@ PrefabInstance:
     - target: {fileID: 4919235141057098257, guid: 9062bb31b3bddf14d8ee865aff8b69b4,
         type: 3}
       propertyPath: m_Layer
-      value: 8
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5434274260999553821, guid: 9062bb31b3bddf14d8ee865aff8b69b4,
         type: 3}
       propertyPath: m_Layer
-      value: 8
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9007814887264982769, guid: 9062bb31b3bddf14d8ee865aff8b69b4,
         type: 3}
@@ -1022,6 +1032,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 9007814887264982769, guid: 9062bb31b3bddf14d8ee865aff8b69b4,
+        type: 3}
+      propertyPath: m_TagString
+      value: PlayerControlled
       objectReference: {fileID: 0}
     - target: {fileID: 9007814887264982772, guid: 9062bb31b3bddf14d8ee865aff8b69b4,
         type: 3}

@@ -6,7 +6,10 @@ public class ObjectSelector : MonoBehaviour
 {
     public LayerMask SelectableObjects;
     public Transform Pointer;
-    [SerializeField] int GroundLayerID,pUnitLayerID;
+    [SerializeField] int GroundLayerID, pUnitLayerID;
+
+    int layerMask = 1 << 8; //[8] is the index of player-unit
+    int layerMask2 = 1 << 10;
 
     public List<GameObject> SelectedUnits;
 
@@ -22,39 +25,34 @@ public class ObjectSelector : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             RaycastHit hitInfo = new RaycastHit();
-            bool hit = Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hitInfo);
-            if (hit)
+            if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hitInfo))
             {
                 Debug.Log(hitInfo.collider.gameObject.layer);
 
-                if (CheckIfSelectable(hitInfo.collider.gameObject.layer))
+
+                Debug.Log("It's working!");
+                if (hitInfo.collider.gameObject.layer == GroundLayerID)
                 {
-                    Debug.Log("It's working!");
-                    if (hitInfo.collider.gameObject.layer == GroundLayerID)
+                    if (SelectedUnits.Count > 0)
                     {
-                        if (SelectedUnits.Count > 0)
+                        for (int i = 0; i < SelectedUnits.Count; i++)
                         {
-                            for (int i = 0; i < SelectedUnits.Count; i++)
-                            {
-                                SelectedUnits[i].GetComponent<MinionController>().Destination = hitInfo.point;
-                                SelectedUnits[i].GetComponent<Animator>().SetBool("isMoving?", true);
-                            }
-                        }
-                       
-                    }
-                    if (hitInfo.collider.gameObject.layer == pUnitLayerID)
-                    {
-                        if (!hitInfo.collider.GetComponent<MinionController>().isSelected)
-                        {
-                            hitInfo.collider.GetComponent<MinionController>().isSelected = true;
-                            SelectedUnits.Add(hitInfo.collider.gameObject);
+                            SelectedUnits[i].GetComponent<MinionController>().Destination = hitInfo.point;
+                            SelectedUnits[i].GetComponent<Animator>().SetBool("isMoving?", true);
                         }
                     }
+
                 }
-                else
+                if (hitInfo.collider.gameObject.tag == "PlayerControlled")
                 {
-                    Debug.Log("nopz");
+                    Debug.Log("Player Hit!");
+                    if (!hitInfo.collider.GetComponent<MinionController>().isSelected)
+                    {
+                        hitInfo.collider.GetComponent<MinionController>().isSelected = true;
+                        SelectedUnits.Add(hitInfo.collider.gameObject);
+                    }
                 }
+
             }
             else
             {
@@ -62,7 +60,7 @@ public class ObjectSelector : MonoBehaviour
             }
         }
 
-        if(Input.GetMouseButtonDown(1))
+        if (Input.GetMouseButtonDown(1))
         {
             if (SelectedUnits.Count != 0)
             {
@@ -78,7 +76,11 @@ public class ObjectSelector : MonoBehaviour
     bool CheckIfSelectable(int layer)
     {
 
-        if (layer == GroundLayerID || layer == pUnitLayerID)
+        if (layerMask == (layerMask | (1 << layer)))
+        {
+            return true;
+        }
+        else if (layerMask2 == (layerMask2 | (1 << layer)))
         {
             return true;
         }
