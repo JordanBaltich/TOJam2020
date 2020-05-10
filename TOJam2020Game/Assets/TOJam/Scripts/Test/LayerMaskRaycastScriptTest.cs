@@ -5,7 +5,7 @@ using UnityEngine;
 public class LayerMaskRaycastScriptTest : MonoBehaviour
 {
 
-    int layerMask = 1 << 8; //[8] is the index of player-unit index
+    int layerMask = 1 << 8; //[8] is the index of player-unit
 
     void Update()
     {
@@ -18,7 +18,6 @@ public class LayerMaskRaycastScriptTest : MonoBehaviour
             if (Physics.Raycast(ray, out hit, Mathf.Infinity, layerMask))
             {
                 Debug.Log(hit.collider.gameObject.layer);
-
             }
         }
     }
